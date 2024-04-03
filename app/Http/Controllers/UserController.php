@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return Product::first()->loadMissing('category')->loadMissing('orders');
+        // return User::first()->loadMissing('orders');
+        // return Category::first()->loadMissing('products');
+        // return Order::first()->loadMissing('user')->loadMissing('product');
+        // return Product::first()->productOrderedBy;
     }
 
     /**
