@@ -15,11 +15,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Product::first()->loadMissing('category')->loadMissing('orders');
+        // return Product::first()->loadMissing('category')->loadMissing('orders');
+        // return Product::first()->productOrderedBy;
+        return Product::with('productOrderedBy')->first()->loadMissing('category', 'orders');
+
         // return User::first()->loadMissing('orders');
         // return Category::first()->loadMissing('products');
         // return Order::first()->loadMissing('user')->loadMissing('product');
-        // return Product::first()->productOrderedBy;
+
+        
     }
 
     /**
