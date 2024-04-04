@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class ProductController extends Controller
         // return Category::first()->loadMissing('products');
         // return Order::first()->loadMissing('user')->loadMissing('product');
 
-        return Product::with("category")->get();
+        // return Product::with("category")->get();
+        return view("product.index", ["viewData" => ["title" => "products", "products" => Product::with("category")->get()]]);
     }
 
     /**
@@ -44,7 +46,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view("product.show", ["viewData" => ["title" => "product", "product" => new ProductResource($product->loadMissing("category"))]]);
     }
 
     /**
